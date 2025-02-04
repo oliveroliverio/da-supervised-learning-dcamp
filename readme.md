@@ -204,3 +204,6 @@ plt.ylabel("Blood Glucose (mg/dl)")
 plt.show()
 ```
 ![](/zz-img/20250203_18-07-29.png)
+
+## Practice Regression! 
+
