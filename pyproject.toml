@@ -3,7 +3,7 @@ name = "da-supervised-learning-dcamp"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "olivero-scrptx",email = "ooliverio@scorpiontx.com"}
+    {name = "oliveroliverio",email = "oliveroliverio@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
@@ -14,3 +14,6 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false

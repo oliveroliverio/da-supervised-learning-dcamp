@@ -10,10 +10,15 @@ set -e  # Exit immediately if a command exits with a non-zero status.
 #    The --no-interaction flag tells Poetry not to prompt for input.
 #    The --name flag sets the project name to the current directory’s basename.
 # ------------------------------------------------------------------------------
+poetry lock
+rm -f pyproject.toml
 if [ ! -f "pyproject.toml" ]; then
   echo "pyproject.toml not found. Initializing a new Poetry project..."
-  PROJECT_NAME=$(basename "$PWD")
+  # Create a valid project name by replacing hyphens with underscores
+  PROJECT_NAME=$(basename "$PWD" | tr '-' '_')
   poetry init --no-interaction --name "$PROJECT_NAME"
+  # Disable package mode
+  echo -e "\n[tool.poetry]\npackage-mode = false" >> pyproject.toml
   echo "Created pyproject.toml with project name: $PROJECT_NAME"
 fi
 
@@ -77,3 +82,6 @@ else
 fi
 
 echo "Reset complete. The virtual environment is active."
+
+
+echo "Reset complete. A new kernel '$KERNEL_NAME' has been created."
