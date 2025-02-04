@@ -154,3 +154,53 @@ See how training accuracy decreases and test accuracy increases as the number of
 Goal: predict blood glucose levels
 ![](/zz-img/20250203_17-51-41.png)
 
+sklearn requires target and feature variables/data in distinct variables, 
+- x = features = all other columns: `X = diabetes_df.drop("glucose", axis=1).values`
+- y = target = glucose values: `y = diabetes_df["glucose"].values`
+
+![](/zz-img/20250203_17-58-02.png)
+
+### Making predictions from a single feature/column. 
+
+``` python
+# get only BMI feature
+X_bmi = X[:, 3]
+# check to see what dimensional arrays these are.  
+print(y.shape, X_bmi.shape)
+
+# since these are 1-dimensional arrays, we need to convert the features 2D for sklearn
+# do this by reshaping
+X_bmi = X_bmi.reshape(-1, 1)
+print(X_bmi.shape)
+
+# (752, 1) is the correct shape now for model 
+```
+
+### Plot glucose vs. bmi
+
+```python
+import matplotlib.pyplot as plt
+plt.scatter(X_bmi, y)
+plt.ylabel("Blood Glucose (mg/dl)")
+plt.xlabel("BMI")
+plt.show() 
+```
+![](/zz-img/20250203_18-04-13.png)
+
+## Fit regression model to data
+use linear regression to fit straight line to data
+``` python
+from sklearn.linear_model import LinearRegression
+# create model
+reg = LinearRegression()
+# train model
+reg.fit(X_bmi, y)
+# predict by fitting a line
+predictions = reg.predict(X_bmi)
+plt.scatter(X_bmi, y)
+plt.plot(X_bmi, predictions, color="red")
+plt.xlabel("BMI")
+plt.ylabel("Blood Glucose (mg/dl)")
+plt.show()
+```
+![](/zz-img/20250203_18-07-29.png)
